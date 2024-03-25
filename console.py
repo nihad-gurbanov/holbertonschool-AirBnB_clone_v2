@@ -10,6 +10,8 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from datetime import datetime
+from uuid import uuid4
 
 
 class HBNBCommand(cmd.Cmd):
@@ -118,13 +120,25 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        elif args.split()[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
+        args = args.split()
+        class_name = args[0]
+        kwargs = {'updated_at': str(datetime.now().isoformat()),
+                  'created_at': str(datetime.now().isoformat()),
+                  '__class__': class_name,
+                  'id': str(uuid4())}
+        for arg in args[1:]:
+            key = arg.split("=")[0]
+            value = eval(arg.split("=")[1])
+            if type(value) is str:
+                value = value.replace("_", " ")
+            kwargs[key] = value
+        new_instance = HBNBCommand.classes[class_name](**kwargs)
+        storage.new(new_instance)
+        new_instance.save()
         print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -319,6 +333,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

@@ -20,6 +20,7 @@ class FileStorage:
             return FileStorage.__objects
 
     def delete(self, obj=None):
+        """ Public instance method that deletes given object"""
         try:
             key = "{}.{}".format(type(obj).__name__, obj.id)
             del FileStorage.__objects[key]

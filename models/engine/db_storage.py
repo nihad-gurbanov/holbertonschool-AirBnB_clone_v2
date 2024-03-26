@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+""" DBStorage """
 from os import getenv
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -10,7 +10,6 @@ from models.review import Review
 from models.state import State
 from models.user import User
 from models.base_model import Base
-
 
 
 class DBStorage:
@@ -49,7 +48,6 @@ class DBStorage:
             objects[key] = value
 
         return objects
-
 
     def new(self, obj):
         """ Function that inserts object as row into database"""

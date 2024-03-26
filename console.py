@@ -125,10 +125,7 @@ class HBNBCommand(cmd.Cmd):
             return
         args = args.split()
         class_name = args[0]
-        kwargs = {'updated_at': str(datetime.now().isoformat()),
-                  'created_at': str(datetime.now().isoformat()),
-                  '__class__': class_name,
-                  'id': str(uuid4())}
+        kwargs = {}
         for arg in args[1:]:
             key = arg.split("=")[0]
             value = eval(arg.split("=")[1])

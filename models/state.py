@@ -16,7 +16,7 @@ class State(BaseModel, Base):
         """ Initialization of State instance """
         super().__init__(*args, **kwargs)
 
-    if getenv('HBNB_TYPE_STORAGE') != 'db': 
+    if getenv('HBNB_TYPE_STORAGE') != 'db':
         @property
         def cities(self):
             """Getter Function for FileStorage"""

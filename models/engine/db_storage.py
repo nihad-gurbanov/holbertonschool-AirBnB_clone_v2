@@ -25,6 +25,15 @@ class DBStorage:
         self.host = getenv('HBNB_MYSQL_HOST')
         self.db = getenv('HBNB_MYSQL_DB')
 
+        if self.user is None:
+            self.user = 'hbnb_test'
+        if self.pwd is None:
+            self.pwd = 'hbnb_test_pwd'
+        if self.host is None:
+            self.host = 'localhost'
+        if self.db is None:
+            self.db = 'hbnb_test_db'
+
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
                                       format(self.user, self.pwd,
                                              self.host, self.db),

@@ -12,6 +12,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.amenity import Amenity
+from models import type_of_storage
 
 
 class test_basemodel(unittest.TestCase):
@@ -53,6 +54,7 @@ class test_basemodel(unittest.TestCase):
         with self.assertRaises(TypeError):
             new = BaseModel(**copy)
 
+    @unittest.skipIf(type_of_storage == "db", "Storage type: Database")
     def test_save(self):
         """ Testing save """
         i = self.value()

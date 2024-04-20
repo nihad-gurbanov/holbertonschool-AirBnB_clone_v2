@@ -18,7 +18,7 @@ def hello():
     Returns:
         str: A simple greeting message.
     """
-    return 'HelloHBNB!'
+    return 'Hello HBNB!'
 
 
 if __name__ == '__main__':

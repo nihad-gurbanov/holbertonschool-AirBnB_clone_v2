@@ -23,10 +23,10 @@ def states(id=None):
 
     if not id:
         return render_template("7-states_list.html", depo=depo.values())
-    
+
     key = f'State.{id}'
     state = None
-    
+
     try:
         state = depo[key]
     except KeyError:

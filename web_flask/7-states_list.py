@@ -3,12 +3,6 @@
 
 
 from flask import Flask, render_template
-
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
-
 from models import storage
 from models.state import State
 
@@ -16,7 +10,7 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route('/state_list', strict_slashes=False)
+@app.route('/states_list', strict_slashes=False)
 def state_list():
     """
     Renders a list of states.
@@ -24,8 +18,8 @@ def state_list():
     Returns:
         str: Rendered HTML template.
     """
-    states = storage.all(State).values()
-    return render_template("7-states_list.html", states=states)
+    depo = storage.all(State).values()
+    return render_template("7-states_list.html", depo=depo)
 
 
 @app.teardown_appcontext
